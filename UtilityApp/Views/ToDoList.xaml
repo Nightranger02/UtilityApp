@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:UtilityApp"
+             x:Class="UtilityApp.ToDoList"
+             Title="ToDoList">
+
+    <ContentPage.BindingContext>
+        <local:ToDoListViewModel/>
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout>
+        <Label 
+            Text="To Do List"
+            FontSize="Header"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Entry HorizontalOptions="Center"
+               MinimumWidthRequest="200"
+               Placeholder="Add Item"
+               x:Name="InputField"
+               Text="{Binding InputValue}"
+               ReturnCommand="{Binding AddToDoCommand}"
+               />
+
+            <!--<Button Text="Add" Clicked=""/>-->
+        </HorizontalStackLayout>
+
+        <ListView x:Name="ToDoItems" ItemsSource="{Binding ToDoItems}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding ToDoText}" FontSize="Large"/>
+                            <ImageButton Source="delete.png" BackgroundColor="LightSlateGray" Scale="0.5"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </VerticalStackLayout>
+
+</ContentPage>
