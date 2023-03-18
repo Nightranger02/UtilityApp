@@ -13,28 +13,27 @@ namespace UtilityApp
         public ICommand AddToDoCommand => new Command(AddToDoItem);
 
         public ICommand RemoveToDoCommand => new Command(RemoveToDoItem);
-        public ObservableCollection<ToDoItem> ToDoItems { get; set; }
+        public ObservableCollection<ToDoItem> ToDoItemsList { get; set; }
         public string InputValue { get; set; }
 
         public ToDoListViewModel()
         {
-            ToDoItems = new ObservableCollection<ToDoItem>();
+            ToDoItemsList = new ObservableCollection<ToDoItem>();
 
-            ToDoItems.Add(new ToDoItem("todo1", true));
-            ToDoItems.Add(new ToDoItem("todo2", true));
-            ToDoItems.Add(new ToDoItem("todo3", false));
+            ToDoItemsList.Add(new ToDoItem("todo1", true));
+            ToDoItemsList.Add(new ToDoItem("todo2", true));
+            ToDoItemsList.Add(new ToDoItem("todo3", false));
         }
 
         void AddToDoItem()
         {
-            ToDoItems.Add(new ToDoItem(InputValue, false));
-            //TODO: clear input value after item is added.
+            ToDoItemsList.Add(new ToDoItem(InputValue, false));            
         }
 
         void RemoveToDoItem(object o)
         {
             ToDoItem todoItemBeingRemoved = o as ToDoItem;
-            ToDoItems.Remove(todoItemBeingRemoved);
+            ToDoItemsList.Remove(todoItemBeingRemoved);
         }
     }
 }

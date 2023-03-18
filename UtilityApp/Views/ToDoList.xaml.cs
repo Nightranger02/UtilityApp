@@ -7,8 +7,8 @@ public partial class ToDoList : ContentPage
 		InitializeComponent();
 	}
 
-    private void AddButton_Clicked(object sender, EventArgs e)
+    private void ClearInput_Clicked(object sender, EventArgs e)
     {
-
+		InputField.Text = string.Empty;
     }
 }

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:UtilityApp"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="UtilityApp.ToDoList"
              Title="ToDoList">
 
@@ -22,18 +23,26 @@
                MinimumWidthRequest="200"
                Placeholder="Add Item"
                x:Name="InputField"
+               ClearButtonVisibility="WhileEditing"
                Text="{Binding InputValue}"
                ReturnCommand="{Binding AddToDoCommand}"
                />
 
-            <Button Text="Add" Clicked="AddButton_Clicked"/>
+            <Button Text="Add">
+                <Button.Behaviors>
+                    <toolkit:EventToCommandBehavior
+                        EventName="Clicked"
+                        Command="{Binding AddToDoCommand}"/>
+                </Button.Behaviors>
+            </Button>
+            <Button Text="Clear" Clicked="ClearInput_Clicked"/>
         </HorizontalStackLayout>
 
-        <ListView x:Name="ToDoItems" ItemsSource="{Binding ToDoItems}">
+        <ListView x:Name="ToDoItems" ItemsSource="{Binding ToDoItemsList}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                             <CheckBox IsChecked="{Binding Completed}"/>
                             <Label Text="{Binding ToDoText}" FontSize="Large"/>
                             <ImageButton 
