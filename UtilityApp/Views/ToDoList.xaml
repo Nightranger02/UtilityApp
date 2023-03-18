@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:UtilityApp"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              x:Class="UtilityApp.ToDoList"
              Title="ToDoList">
 
@@ -25,7 +26,7 @@
                ReturnCommand="{Binding AddToDoCommand}"
                />
 
-            <!--<Button Text="Add" Clicked=""/>-->
+            <Button Text="Add" Clicked="AddButton_Clicked"/>
         </HorizontalStackLayout>
 
         <ListView x:Name="ToDoItems" ItemsSource="{Binding ToDoItems}">
@@ -33,8 +34,14 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
+                            <CheckBox IsChecked="{Binding Completed}"/>
                             <Label Text="{Binding ToDoText}" FontSize="Large"/>
-                            <ImageButton Source="delete.png" BackgroundColor="LightSlateGray" Scale="0.5"/>
+                            <ImageButton 
+                                Source="delete.png" 
+                                BackgroundColor="LightSlateGray" 
+                                Scale="0.5" 
+                                Command="{Binding Path=BindingContext.RemoveToDoCommand, Source={Reference ToDoItems}}"
+                                CommandParameter="{Binding .}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
